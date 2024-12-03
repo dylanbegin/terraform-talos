@@ -1,0 +1,76 @@
+k8sClientRateLimit:
+  qps: 50
+  burst: 100
+cluster:
+  name: talosprod
+  id: 1
+agent: true
+securityContext:
+  capabilities:
+    ciliumAgent: [CHOWN, KILL, NET_ADMIN, NET_RAW, IPC_LOCK, SYS_ADMIN, SYS_RESOURCE, DAC_OVERRIDE, FOWNER, SETGID, SETUID]
+    cleanCiliumState: [NET_ADMIN, SYS_ADMIN, SYS_RESOURCE]
+autoDirectNodeRoutes: false
+bgpControlPlane:
+  enabled: false
+l2announcements:
+  enabled: true
+  leaseDuration: 4s
+  leaseRenewDeadline: 2s
+  leaseRetryPeriod: 1s
+bpf:
+  autoMount:
+    enabled: true
+  masquerade: true
+encryption: #enforce wireguard for e/w traffic
+  enabled: true
+  type: wireguard
+externalIPs:
+  enabled: false
+gatewayAPI:
+  enabled: false
+hubble:
+  enabled: true
+  tls:
+    enabled: false
+  metrics:
+    enabled: [dns:query;ignoreAAAA, drop, tcp, flow, icmp, http]
+  relay:
+    enabled: true
+    rollOutPods: true
+    replicas: 1
+  ui:
+    enabled: true
+    rollOutPods: true
+    replicas: 1
+ingressController:
+  enabled: false
+  default: false
+  loadbalancerMode: dedicated
+ipam:
+  mode: "kubernetes"
+#ipv4NativeRoutingCIDR: "10.11.0.0/16" #do not masq/snat pods
+ipv4:
+  enabled: true
+ipv6:
+  enabled: false
+k8sServiceHost: localhost
+k8sServicePort: 7445 #use kubeprisim
+kubeProxyReplacement: true #for eBPF
+kubeProxyReplacementHealthzBindAddr: 0.0.0.0:10256
+l7Proxy: false #enable if using Cilium ingress/gwapi
+loadBalancer:
+  algorithm: maglev #improvement from random
+  mode: snat
+  acceleration: disabled #eBPF acceleration
+nodePort: #using ingress/gwapi
+  enabled: false
+operator:
+  replicas: 2
+  rollOutPods: true
+rollOutCiliumPods: true
+tunnelProtocol: vxlan
+routingMode: tunnel #use native for eBPF node traffic
+cgroup:
+  autoMount:
+    enabled: false
+  hostRoot: /sys/fs/cgroup

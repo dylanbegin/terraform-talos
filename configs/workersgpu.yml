@@ -1,0 +1,20 @@
+machine:
+  nodeLabels:
+    nvidia.com/gpu.present: true
+  kernel:
+    modules:
+      - name: nvidia
+      - name: nvidia_uvm
+      - name: nvidia_drm
+      - name: nvidia_modeset
+  sysctls:
+    net.core.bpf_jit_harden: 1
+  # uncomment below to set default runtime
+  #files:
+  #  - content: |
+  #      [plugins]
+  #        [plugins."io.containerd.grpc.v1.cri"]
+  #          [plugins."io.containerd.grpc.v1.cri".containerd]
+  #            default_runtime_name = "nvidia"
+  #    path: /etc/cri/conf.d/20-customization.part
+  #    op: create

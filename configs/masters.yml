@@ -1,0 +1,50 @@
+machine:
+  kubelet:
+    #clusterDNS:
+    #  - ${talos-clusterdns}
+    extraConfig:
+      serverTLSBootstrap: true
+    extraArgs:
+      rotate-server-certificates: false
+  features:
+    kubernetesTalosAPIAccess:
+      enabled: true
+      allowedRoles:
+        - os:reader
+      allowedKubernetesNamespaces:
+        - kube-system
+    kubePrism:
+      enabled: true
+      port: 7445
+    hostDNS:
+      enabled: true
+      forwardKubeDNSToHost: false
+  network:
+    interfaces:
+      - interface: eth0
+        dhcp: false
+        vip:
+          ip: ${talos-vipip}
+    kubespan:
+      enabled: false
+  install:
+    image: ${talos-install}
+  time:
+    servers:
+      - ${talos-ntp}
+cluster:
+  clusterName: ${talos-cluster}
+  network:
+    cni:
+      name: none
+    #podSubnets:
+    #  - ${talos-podcidr} #default 10.244.0.0/16
+    #serviceSubnets:
+    #  - ${talos-svccidr} #default 10.96.0.0/12
+  apiServer:
+    certSANs:
+      - 127.0.0.1 #KubePrism
+      - localhost #KubePrism
+      - ${talos-vipfqdn}
+  proxy:
+    disabled: true

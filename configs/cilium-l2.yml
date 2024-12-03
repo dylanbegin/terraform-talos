@@ -1,0 +1,39 @@
+cluster:
+    inlineManifests:
+        - name: cilium-l2
+          contents: |-
+            ---
+            apiVersion: "cilium.io/v2alpha1"
+            kind: CiliumL2AnnouncementPolicy
+            metadata:
+              name: cilium-lb-l2
+            spec:
+              # Announce all services
+              serviceSelector:
+                matchExpressions:
+                  - {key: somekey, operator: NotIn, values: ['never-used-value']}
+              # Only run on workers
+              nodeSelector:
+                matchExpressions:
+                  - key: node-role.kubernetes.io/control-plane
+                    operator: DoesNotExist
+              interfaces:
+              - ^eth[0-9]+
+              externalIPs: false
+              loadBalancerIPs: true
+            ---
+            apiVersion: "cilium.io/v2alpha1"
+            kind: CiliumLoadBalancerIPPool
+            metadata:
+              name: "l2-lb-pool"
+            spec:
+              blocks:
+              - cidr: "10.10.10.100/32" #ingress
+              - cidr: "10.10.10.101/32" #unifi-ap
+              - cidr: "10.10.10.102/32" #portainer
+              - cidr: "10.10.10.103/32" #teleport
+              - cidr: "10.10.10.111/32" #testing
+              - cidr: "10.10.10.112/32" #testing
+              - cidr: "10.10.10.113/32" #testing
+              - cidr: "10.10.10.114/32" #testing
+              - cidr: "10.10.10.115/32" #testing

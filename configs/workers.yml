@@ -1,0 +1,30 @@
+machine:
+  features:
+    kubePrism:
+      enabled: true
+      port: 7445
+    hostDNS:
+      enabled: true
+      forwardKubeDNSToHost: true
+  kubelet:
+    extraConfig:
+      serverTLSBootstrap: true
+    extraArgs:
+      rotate-server-certificates: false
+    extraMounts: #longhorn storage mounts
+      - destination: /var/lib/longhorn
+        type: bind
+        source: /var/lib/longhorn
+        options:
+          - bind
+          - rshared
+          - rw
+  network:
+    kubespan:
+      enabled: false
+  install:
+    image: ${talos-install}
+    disk: /dev/sda #root disk
+  time:
+    servers:
+      - ${talos-ntp}

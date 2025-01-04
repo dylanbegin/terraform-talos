@@ -14,6 +14,16 @@ This repo provides all terraform automation for deploying the Talos Kubernetes c
   - Uses Cilium as the CNI.
   - Uses Argo-cd for git-ops.
 
+> [!TIP]
+> This repo is part of my IaC automation series. If you are building this in mind please follow my repo's in the order below.
+
+1.  [terraform-iso-get](https://github.com/dylanbegin/terraform-iso-get)
+1.  [packer](https://github.com/dylanbegin/packer)
+1.  [terraform-core](https://github.com/dylanbegin/terraform-core)
+1.  [ansible](https://github.com/dylanbegin/ansible)
+1.  *you are here* [terraform-talos](https://github.com/dylanbegin/terraform-talos)
+1.  [k8s-apps](https://github.com/dylanbegin/k8s-apps)
+
 # Build Your Secrets File
 Keeping in best practice, this repo does not contain any sensitive information. You will need to create a directory outside of this git repo on a properly encrypted disk/usb to save the secrets file. Below is the template needed for the file which needs to be named `tf-secrets.tfvars`.
 ```hcl

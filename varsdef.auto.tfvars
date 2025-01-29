@@ -91,10 +91,10 @@ talos-ntp          = "pool.ntp.org"
 
 # package versions
 # iscsi-tools, qemu-guest-agent, util-linux-tools
-talos-install      = "factory.talos.dev/installer/88d1f7a5c4f1d3aba7df787c448c1d3d008ed29cfb34af53fa0df4336a56040b:v1.8.0"
+talos-install      = "factory.talos.dev/installer/88d1f7a5c4f1d3aba7df787c448c1d3d008ed29cfb34af53fa0df4336a56040b:v1.9.2"
 # iscsi-tools, nonfree-kmod-nvidia-production, nvidia-container-toolkit-production, qemu-guest-agent, util-linux-tools
-talos-install-gpu  = "factory.talos.dev/installer/c35d5bd14fd96abc839f9f44f5effd00c48f654edb8a42648f4b2eb6051d1dd6:v1.8.0"
-talos-version      = "v1.8.0"
-kubernetes-version = "v1.31.1"
-cilium-version     = "1.16.1"
-argocd-version     = "7.6.2"
+talos-install-gpu  = "factory.talos.dev/installer/c35d5bd14fd96abc839f9f44f5effd00c48f654edb8a42648f4b2eb6051d1dd6:v1.9.2"
+talos-version      = "v1.9.2"
+kubernetes-version = "v1.32.1"
+cilium-version     = "1.16.6"
+argocd-version     = "7.7.18"

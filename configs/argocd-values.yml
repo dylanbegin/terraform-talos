@@ -38,7 +38,7 @@ configs:
   repositories:
     cryogence-repo:
       name: cryogence
-      url: https://git.cryogence.net/cryogence/k8s-apps.git
+      url: https://github.com/dylanbegin/k8s-apps.git
       type: git
 controller:
   replicas: 1

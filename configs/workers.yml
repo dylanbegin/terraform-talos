@@ -6,11 +6,15 @@ machine:
     hostDNS:
       enabled: true
       forwardKubeDNSToHost: true
+  kernel:
+    modules:
+      - name: nvme_tcp
+      - name: vfio_pci
   kubelet:
     extraConfig:
       serverTLSBootstrap: true
     extraArgs:
-      rotate-server-certificates: false
+      rotate-server-certificates: true
     extraMounts: #longhorn storage mounts
       - destination: /var/lib/longhorn
         type: bind
@@ -25,6 +29,8 @@ machine:
   install:
     image: ${talos-install}
     disk: /dev/sda #root disk
+  sysctls:
+    vm.nr_hugepages: "1024"
   time:
     servers:
       - ${talos-ntp}

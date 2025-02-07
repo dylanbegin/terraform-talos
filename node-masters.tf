@@ -65,7 +65,7 @@ resource "proxmox_virtual_environment_vm" "master" {
     datastore_id = var.common-datastore
     file_format  = var.common-format
     interface    = var.common-diskiface
-    size         = var.common-disksize
+    size         = var.common-rootsize
     ssd          = var.common-ssd
     cache        = var.common-cache
     iothread     = var.common-iothread

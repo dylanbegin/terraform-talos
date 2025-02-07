@@ -174,7 +174,7 @@ variable "common-diskiface" {
   description = "Disk interface name for the VM."
 }
 
-variable "common-disksize" {
+variable "common-rootsize" {
   type        = string
   description = "Disk size in GB for root drive in the VM."
 }
@@ -374,9 +374,9 @@ variable "worker-memory" {
   description = "Memory size in MB for workers nodes."
 }
 
-variable "worker-disksize" {
+variable "worker-datasize" {
   type        = string
-  description = "Disk size in GB for root drive in the VM."
+  description = "Disk size in GB for data drive in the VM."
 }
 
 # talos settings

@@ -4,8 +4,8 @@ machine:
       enabled: true
       port: 7445
     hostDNS:
-      enabled: true
-      forwardKubeDNSToHost: true
+      enabled: false
+      forwardKubeDNSToHost: false
   kernel:
     modules:
       - name: nvme_tcp

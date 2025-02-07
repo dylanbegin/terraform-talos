@@ -17,7 +17,7 @@ machine:
       enabled: true
       port: 7445
     hostDNS:
-      enabled: true
+      enabled: false
       forwardKubeDNSToHost: false
   network:
     interfaces:

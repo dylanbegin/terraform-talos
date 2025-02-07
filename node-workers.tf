@@ -70,7 +70,7 @@ resource "proxmox_virtual_environment_vm" "worker" {
     datastore_id = var.common-datastore
     file_format  = var.common-format
     interface    = var.common-diskiface
-    size         = var.worker-disksize
+    size         = var.worker-datasize
     ssd          = var.common-ssd
     cache        = var.common-cache
     iothread     = var.common-iothread
@@ -82,12 +82,12 @@ resource "proxmox_virtual_environment_vm" "worker" {
     type         = var.common-efitype
     pre_enrolled_keys = var.common-efikeys
   }
-  # VM data disk -- talos does not yet support longhorn v2
+  # VM data disk
   #disk {
   #  datastore_id = var.common-datastore
   #  file_format  = var.common-format
   #  interface    = "scsi1"
-  #  size         = var.worker-disksize
+  #  size         = var.worker-datasize
   #  ssd          = var.common-ssd
   #  cache        = var.common-cache
   #  iothread     = var.common-iothread

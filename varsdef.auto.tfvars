@@ -30,7 +30,7 @@ common-ciiface    = "ide0"
 common-scsihw     = "virtio-scsi-single"
 common-format     = "raw"
 common-diskiface  = "scsi0"
-common-disksize   = "10"
+common-rootsize   = "10"
 common-ssd        = true
 common-cache      = "none"
 common-iothread   = true
@@ -76,8 +76,8 @@ worker-desc       = "Kubernetes Worker<br>Talos Linux"
 worker-tags       = ["k8s", "worker"]
 worker-ipprefix   = "10.10.10.7" #10.10.10.71-10.10.10.76
 worker-cores      = 10
-worker-memory     = 59392
-worker-disksize   = "900"
+worker-memory     = 56320
+worker-datasize   = "950"
 
 # talos cluster configs
 # installed extentions: iscsi-tools, qemu-guest-agent, util-linux-tools
@@ -91,10 +91,10 @@ talos-ntp          = "pool.ntp.org"
 
 # package versions
 # iscsi-tools, qemu-guest-agent, util-linux-tools
-talos-install      = "factory.talos.dev/installer/88d1f7a5c4f1d3aba7df787c448c1d3d008ed29cfb34af53fa0df4336a56040b:v1.9.2"
+talos-install      = "factory.talos.dev/installer/88d1f7a5c4f1d3aba7df787c448c1d3d008ed29cfb34af53fa0df4336a56040b:v1.9.3"
 # iscsi-tools, nonfree-kmod-nvidia-production, nvidia-container-toolkit-production, qemu-guest-agent, util-linux-tools
-talos-install-gpu  = "factory.talos.dev/installer/c35d5bd14fd96abc839f9f44f5effd00c48f654edb8a42648f4b2eb6051d1dd6:v1.9.2"
-talos-version      = "v1.9.2"
+talos-install-gpu  = "factory.talos.dev/installer/c35d5bd14fd96abc839f9f44f5effd00c48f654edb8a42648f4b2eb6051d1dd6:v1.9.3"
+talos-version      = "v1.9.3"
 kubernetes-version = "v1.32.1"
-cilium-version     = "1.16.6"
-argocd-version     = "7.7.18"
+cilium-version     = "1.17.0"
+argocd-version     = "7.8.0"

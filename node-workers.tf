@@ -14,7 +14,6 @@ resource "proxmox_virtual_environment_vm" "worker" {
 
   # VM CD for Talos boot
   cdrom {
-    enabled   = var.common-cd
     file_id   = var.common-cdiso
     interface = var.common-cdiface
   }

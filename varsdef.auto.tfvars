@@ -22,7 +22,6 @@ common-bridge     = "vmbr1"
 common-model      = "virtio"
 common-fw         = false
 ## vm cd settings
-common-cd         = true
 common-cdiso      = "nomad:iso/talos.iso" #<datastore>:iso/<iso-file>
 common-cdiface    = "ide2"
 common-ciiface    = "ide0"

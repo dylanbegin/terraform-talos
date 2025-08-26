@@ -18,15 +18,13 @@ data "helm_template" "cilium" {
 }
 
 # prep argocd with helm release
-data "helm_release" "argocd" {
+resource "helm_release" "argocd" {
   name         = "argo-cd"
   namespace    = "argocd"
   repository   = "https://argoproj.github.io/argo-helm"
   chart        = "argo-cd"
   version      = var.argocd-version
-  kube_version = var.kubernetes-version
   values       = ["${file("configs/argocd-values.yml")}"]
-  include_crds = true
 }
 
 # generate talos secret

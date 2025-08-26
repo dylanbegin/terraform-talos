@@ -138,11 +138,6 @@ variable "common-fw" {
 }
 
 ## vm cd settings
-variable "common-cd" {
-  type        = bool
-  description = "CD device state for the VM."
-}
-
 variable "common-cdiso" {
   type        = string
   description = "CD ISO attached for the VM."

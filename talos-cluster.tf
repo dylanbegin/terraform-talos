@@ -17,8 +17,8 @@ data "helm_template" "cilium" {
   include_crds = true
 }
 
-# prep argocd with helm template
-data "helm_template" "argocd" {
+# prep argocd with helm release
+data "helm_release" "argocd" {
   name         = "argo-cd"
   namespace    = "argocd"
   repository   = "https://argoproj.github.io/argo-helm"
@@ -79,16 +79,6 @@ resource "talos_machine_configuration_apply" "controlplane" {
     templatefile("configs/cilium-l2.yml", {
     }),
     templatefile("configs/argocd-ns.yml", {
-    }),
-    yamlencode({
-      cluster = {
-        inlineManifests = [{
-          name = "argocd"
-          contents = join("---\n", [
-            data.helm_template.argocd.manifest
-          ]),
-        }],
-      },
     }),
     templatefile("configs/vault-secret.yml", {
       vault_token = var.vault_token

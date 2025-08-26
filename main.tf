@@ -22,3 +22,8 @@ provider "proxmox" {
   api_token = var.pve_api_token
   insecure  = true
 }
+
+provider "helm" {
+  kubernetes = {
+    config_path = "~/.kube/config"
+  }

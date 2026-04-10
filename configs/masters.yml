@@ -29,6 +29,8 @@ machine:
       enabled: false
   install:
     image: ${talos-install}
+    #disable wipe to keep longhorn storage
+    wipe: false
   time:
     servers:
       - ${talos-ntp}

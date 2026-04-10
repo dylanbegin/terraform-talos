@@ -1,3 +1,6 @@
+> [!NOTE]
+> This is a mirrored repo.
+
 > [!WARNING]
 > This README is still under development!
 

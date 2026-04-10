@@ -28,6 +28,8 @@ machine:
       enabled: false
   install:
     image: ${talos-install}
+    #disable wipe to keep longhorn storage
+    wipe: false
     disk: /dev/sda #root disk
   sysctls:
     vm.nr_hugepages: "1024"

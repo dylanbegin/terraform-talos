@@ -53,3 +53,18 @@ Once the core services are up and running we are now ready to deploy the Kuberne
 1. Validate the build: `terraform plan -var-file={path/to/secrets/}tf-secrets.tfvars`
 1. Run the build: `terraform apply -var-file={path/to/secrets/}tf-secrets.tfvars -parallelism=2`
 
+# Verify Installation
+Several commands below are useful for ensuring the status of the install.
+- Talos status commands:
+  - Monitor Talos cluster: `TERM=xterm talosctl dashboard --nodes <master-node-ip>`
+  - Check node disk: `talosctl --nodes <node-ip> get disks`
+  - Check node mounts: `talosctl --nodes <node-ip> get mounts`
+  - Check Longhorn volumes: `talosctl --nodes <node-ip> get volumestatus r-longhorn`
+  - Ensure disk are accepted by longhorn:
+    - `kubectl -n longhorn-system get pods -l longhorn.io/component=instance-manager`
+    - `kubectl get nodes.longhorn.io -n longhorn-system`
+    - `kubectl -n longhorn-system get nodes.longhorn.io <k8s-node> \
+  -o jsonpath="{.status.diskStatus['longhorn-v2'].conditions}"`
+- Cilium status commands:
+  - General status: `cilium status`
+  - Detailed status: `kubectl -n kube-system exec -it <cilium-pod> -- cilium-dbg status --verbose`

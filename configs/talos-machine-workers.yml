@@ -22,5 +22,9 @@ machine:
     #disable wipe to keep longhorn v1 storage
     wipe: false
     disk: /dev/sda #root disk
+  nodeLabels:
+    node.longhorn.io/create-default-disk: "config"
+  nodeAnnotations:
+    node.longhorn.io/default-disks-config: '[{"name":"longhorn-v2","path":"/dev/disk/by-partlabel/r-longhorn","diskType":"block","allowScheduling":true}]'
   sysctls: #longhorn v2 engine
     vm.nr_hugepages: "1024"

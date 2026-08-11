@@ -21,7 +21,7 @@ configs:
         - CiliumEndpointSlice
         clusters:
         - "*"
-      ### Network resources created by the Kubernetes control plane and excluded to reduce the number of watched events and UI clutter
+      ### Network resources created by the control plane and excluded to reduce the number of watched events and UI clutter
       - apiGroups:
         - ''
         - discovery.k8s.io

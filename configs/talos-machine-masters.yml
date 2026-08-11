@@ -19,21 +19,10 @@ machine:
     hostDNS:
       enabled: false
       forwardKubeDNSToHost: false
-  network:
-    interfaces:
-      - interface: eth0
-        dhcp: false
-        vip:
-          ip: ${talos-vipip}
-    kubespan:
-      enabled: false
   install:
     image: ${talos-install}
     #disable wipe to keep longhorn storage
     wipe: false
-  time:
-    servers:
-      - ${talos-ntp}
 cluster:
   clusterName: ${talos-cluster}
   extraManifests:

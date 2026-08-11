@@ -369,6 +369,11 @@ variable "worker-memory" {
   description = "Memory size in MB for workers nodes."
 }
 
+variable "worker-datastore" {
+  type        = string
+  description = "Datastore storage location for DATA disk."
+}
+
 variable "worker-datasize" {
   type        = string
   description = "Disk size in GB for data drive in the VM."

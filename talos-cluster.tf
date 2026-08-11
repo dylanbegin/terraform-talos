@@ -23,6 +23,7 @@ resource "helm_release" "argocd" {
   namespace    = "argocd"
   repository   = "https://argoproj.github.io/argo-helm"
   chart        = "argo-cd"
+  replace      = true #re-use name if exist
   version      = var.argocd-version
   values       = ["${file("configs/argocd-values.yml")}"]
 }
@@ -54,16 +55,21 @@ resource "talos_machine_configuration_apply" "controlplane" {
   machine_configuration_input = data.talos_machine_configuration.controlplane.machine_configuration
 
   config_patches = [
-    templatefile("configs/masters.yml", {
+    templatefile("configs/talos-machine-masters.yml", {
       talos-cluster    = var.talos-cluster
       talos-clusterdns = var.talos-clusterdns
       talos-install    = var.talos-install
-      talos-ntp        = var.talos-ntp
-      talos-vipip      = var.talos-vipip
       talos-vipfqdn    = var.talos-vipfqdn
       talos-podcidr    = var.talos-podcidr
       talos-svccidr    = var.talos-svccidr
     }),
+    templatefile("configs/talos-network.yml", {
+      talos-ntp        = var.talos-ntp
+    }),
+    templatefile("configs/talos-vip.yml", {
+      talos-vipip      = var.talos-vipip
+    }),
+    # needed to bootstrap cilium with cluster
     yamlencode({
       cluster = {
         inlineManifests = [{
@@ -74,13 +80,10 @@ resource "talos_machine_configuration_apply" "controlplane" {
         }],
       },
     }),
-    templatefile("configs/cilium-l2.yml", {
-    }),
-    templatefile("configs/argocd-ns.yml", {
-    }),
+    templatefile("configs/cilium-l2.yml", {}),
+    templatefile("configs/argocd-ns.yml", {}),
     templatefile("configs/vault-secret.yml", {
       vault_token = var.vault_token
-      vault_ica   = var.vault_ica
     })
   ]
 }
@@ -107,13 +110,15 @@ resource "talos_machine_configuration_apply" "workergpu" {
   machine_configuration_input = data.talos_machine_configuration.workergpu.machine_configuration
 
   config_patches = [
-    templatefile("configs/workers.yml", {
+    templatefile("configs/talos-machine-workers.yml", {
       talos-cluster  = var.talos-cluster
       talos-install  = var.talos-install-gpu
-      talos-ntp      = var.talos-ntp
     }),
-    templatefile("configs/workersgpu.yml", {
-    })
+    templatefile("configs/talos-machine-workers-gpu.yml", {}),
+    templatefile("configs/talos-network.yml", {
+      talos-ntp        = var.talos-ntp
+    }),
+    templatefile("configs/talos-longhorn.yml", {})
   ]
 }
 
@@ -139,11 +144,14 @@ resource "talos_machine_configuration_apply" "worker" {
   machine_configuration_input = data.talos_machine_configuration.worker.machine_configuration
 
   config_patches = [
-    templatefile("configs/workers.yml", {
+    templatefile("configs/talos-machine-workers.yml", {
       talos-cluster  = var.talos-cluster
       talos-install  = var.talos-install
-      talos-ntp      = var.talos-ntp
-    })
+    }),
+    templatefile("configs/talos-network.yml", {
+      talos-ntp        = var.talos-ntp
+    }),
+    templatefile("configs/talos-longhorn.yml", {})
   ]
 }
 

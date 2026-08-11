@@ -1,0 +1,10 @@
+# Longhorn v2 engine disk config
+apiVersion: v1alpha1
+kind: RawVolumeConfig
+name: longhorn
+provisioning:
+  diskSelector:
+    # match to all DATA disk provisioned to the vm.
+    # ROOT disk will be skipped.
+    match: disk.transport == 'virtio' && !system_disk
+  minSize: 1GiB # let grow to size of disk

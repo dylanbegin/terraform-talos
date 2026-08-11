@@ -50,10 +50,6 @@ resource "proxmox_virtual_environment_vm" "worker" {
     dedicated    = var.worker-memory
     shared       = var.common-ballon
   }
-  # GPU only on worker 1 (node 1) and worker 2 (node 2)
-  #hostpci {
-  #  mapping = var.worker-gpu
-  #}
   vga {
     type         = var.common-vgatype
   }
@@ -69,7 +65,7 @@ resource "proxmox_virtual_environment_vm" "worker" {
     datastore_id = var.common-datastore
     file_format  = var.common-format
     interface    = var.common-diskiface
-    size         = var.worker-datasize
+    size         = var.common-rootsize
     ssd          = var.common-ssd
     cache        = var.common-cache
     iothread     = var.common-iothread
@@ -82,16 +78,16 @@ resource "proxmox_virtual_environment_vm" "worker" {
     pre_enrolled_keys = var.common-efikeys
   }
   # VM data disk
-  #disk {
-  #  datastore_id = var.common-datastore
-  #  file_format  = var.common-format
-  #  interface    = "scsi1"
-  #  size         = var.worker-datasize
-  #  ssd          = var.common-ssd
-  #  cache        = var.common-cache
-  #  iothread     = var.common-iothread
-  #  discard      = var.common-discard
-  #}
+  disk {
+    datastore_id = var.worker-datastore
+    file_format  = var.common-format
+    interface    = "scsi1"
+    size         = var.worker-datasize
+    ssd          = var.common-ssd
+    cache        = var.common-cache
+    iothread     = var.common-iothread
+    discard      = var.common-discard
+  }
   # VM options
   on_boot        = var.common-onboot
   boot_order     = var.common-bootorder

@@ -10,11 +10,11 @@ common-ostype     = "l26"
 common-machine    = "q35"
 ## vm hardware settings
 common-bios       = "ovmf"
-common-cputype    = "x86-64-v3"
+common-cputype    = "host"
 common-cpusockets = 1
 common-ballon     = 0
 common-vgatype    = "std" #serial0 for TTY
-common-datastore  = "anshar"
+common-datastore  = "local-lvm"
 ## vm networking settings
 common-ipv4gw     = "10.10.10.1"
 common-cidr       = "24"
@@ -39,7 +39,7 @@ common-efitype    = "4m"
 common-efikeys    = false
 ## vm options
 common-onboot     = true
-common-bootorder  = ["scsi0", "ide2"] #boot to talos iso
+common-bootorder  = ["scsi0", "ide2"]
 common-agent      = true
 common-trim       = true
 
@@ -76,10 +76,10 @@ worker-tags       = ["k8s", "worker"]
 worker-ipprefix   = "10.10.10.7" #10.10.10.71-10.10.10.76
 worker-cores      = 10
 worker-memory     = 56320
-worker-datasize   = "950"
+worker-datastore  = "anshar"
+worker-datasize   = "900"
 
 # talos cluster configs
-# installed extentions: iscsi-tools, qemu-guest-agent, util-linux-tools
 talos-cluster      = "talosprod"
 talos-vipip        = "10.10.10.60"
 talos-vipfqdn      = "vip.cryogence.org"
@@ -89,11 +89,12 @@ talos-clusterdns   = "10.12.0.5"
 talos-ntp          = "pool.ntp.org"
 
 # package versions
-# iscsi-tools, qemu-guest-agent, util-linux-tools
-talos-install      = "factory.talos.dev/installer/88d1f7a5c4f1d3aba7df787c448c1d3d008ed29cfb34af53fa0df4336a56040b:v1.9.6"
-# iscsi-tools, nonfree-kmod-nvidia-production, nvidia-container-toolkit-production, qemu-guest-agent, util-linux-tools
-talos-install-gpu  = "factory.talos.dev/installer/c35d5bd14fd96abc839f9f44f5effd00c48f654edb8a42648f4b2eb6051d1dd6:v1.9.6"
-talos-version      = "v1.9.6"
-kubernetes-version = "v1.32.1"
-cilium-version     = "1.17.0"
-argocd-version     = "8.3.0"
+# command-line: console=ttyS0 net.ifnames=0 ipv6.disable=1
+# amd-ucode intel-ucode gvisor iscsi-tools qemu-guest-agent util-linux-tools
+talos-install      = "factory.talos.dev/nocloud-installer/968a7c25daaff07ab0478c19b89bccf55892ad85e91a2ddaa8c225d7000c0897:v1.13.8"
+# + nonfree-kmod-nvidia-production, nvidia-container-toolkit-production
+talos-install-gpu  = "factory.talos.dev/nocloud-installer/56e56e3dd5f7a768fadbc58a0784dddea1aafa3891216327fe7532480f7953c1:v1.13.8"
+talos-version      = "v1.13.8"
+kubernetes-version = "v1.36.2"
+cilium-version     = "1.20.0"
+argocd-version     = "10.3.0"

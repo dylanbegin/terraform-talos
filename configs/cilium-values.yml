@@ -1,4 +1,5 @@
 k8sClientRateLimit:
+  #adjusted for better vop perf
   qps: 50
   burst: 100
 cluster:

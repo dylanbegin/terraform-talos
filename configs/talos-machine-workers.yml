@@ -7,32 +7,20 @@ machine:
       enabled: false
       forwardKubeDNSToHost: false
   kernel:
-    modules:
+    modules: #longhorn v2 engine
       - name: nvme_tcp
       - name: vfio_pci
+      - name: uio_pci_generic
+      - name: ublk_drv
   kubelet:
     extraConfig:
       serverTLSBootstrap: true
     extraArgs:
       rotate-server-certificates: true
-    extraMounts: #longhorn storage mounts
-      - destination: /var/lib/longhorn
-        type: bind
-        source: /var/lib/longhorn
-        options:
-          - bind
-          - rshared
-          - rw
-  network:
-    kubespan:
-      enabled: false
   install:
     image: ${talos-install}
-    #disable wipe to keep longhorn storage
+    #disable wipe to keep longhorn v1 storage
     wipe: false
     disk: /dev/sda #root disk
-  sysctls:
+  sysctls: #longhorn v2 engine
     vm.nr_hugepages: "1024"
-  time:
-    servers:
-      - ${talos-ntp}

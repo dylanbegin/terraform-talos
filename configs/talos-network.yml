@@ -1,0 +1,9 @@
+apiVersion: v1alpha1
+kind: KubeSpanConfig
+enabled: false
+---
+apiVersion: v1alpha1
+kind: TimeSyncConfig
+ntp:
+  servers:
+    - ${talos-ntp}

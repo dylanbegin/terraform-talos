@@ -1,0 +1,4 @@
+apiVersion: v1alpha1
+kind: Layer2VIPConfig
+name: ${talos-vipip} # vip ipv4 address
+link: eth0

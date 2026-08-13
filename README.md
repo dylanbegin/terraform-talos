@@ -1,7 +1,7 @@
 > [!NOTE]
 > This is a mirrored repo.
 
-# ![logo](https://icon.horse/icon/www.siderolabs.com) Terraform Repo for Kubernetes Cluster
+# ![logo](https://github.com/homarr-labs/dashboard-icons/raw/refs/heads/main/svg/talos.svg) Terraform Repo for Kubernetes Cluster
 > [!IMPORTANT]
 > This repo is built for my own environment so please review all configurations to verify compatibility!
 

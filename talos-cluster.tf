@@ -18,15 +18,15 @@ data "helm_template" "cilium" {
 }
 
 # prep argocd with helm release
-resource "helm_release" "argocd" {
-  name         = "argo-cd"
-  namespace    = "argocd"
-  repository   = "https://argoproj.github.io/argo-helm"
-  chart        = "argo-cd"
-  replace      = true #re-use name if exist
-  version      = var.argocd-version
-  values       = ["${file("configs/argocd-values.yml")}"]
-}
+#resource "helm_release" "argocd" {
+#  name         = "argo-cd"
+#  namespace    = "argocd"
+#  repository   = "https://argoproj.github.io/argo-helm"
+#  chart        = "argo-cd"
+#  replace      = true #re-use name if exist
+#  version      = var.argocd-version
+#  values       = ["${file("configs/argocd-values.yml")}"]
+#}
 
 # generate talos secret
 resource "talos_machine_secrets" "tsecrets" {

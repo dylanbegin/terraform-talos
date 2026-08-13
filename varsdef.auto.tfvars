@@ -90,10 +90,10 @@ talos-ntp          = "pool.ntp.org"
 
 # package versions
 # command-line: console=ttyS0 net.ifnames=0 ipv6.disable=1
-# amd-ucode intel-ucode gvisor iscsi-tools qemu-guest-agent util-linux-tools
-talos-install      = "factory.talos.dev/nocloud-installer/968a7c25daaff07ab0478c19b89bccf55892ad85e91a2ddaa8c225d7000c0897:v1.13.8"
+# amd-ucode intel-ucode iscsi-tools qemu-guest-agent util-linux-tools
+talos-install      = "factory.talos.dev/nocloud-installer/5176fb89b1ee1303ab8c3898a7fada29822856762e7459f2b4b8989ce9609ee0:v1.13.8"
 # + nonfree-kmod-nvidia-production, nvidia-container-toolkit-production
-talos-install-gpu  = "factory.talos.dev/nocloud-installer/56e56e3dd5f7a768fadbc58a0784dddea1aafa3891216327fe7532480f7953c1:v1.13.8"
+talos-install-gpu  = "factory.talos.dev/nocloud-installer/58186f1f433747a083060febb17eb95f3eb1f1d6cfcf6ceb2c05d0270f025ad7:v1.13.8"
 talos-version      = "v1.13.8"
 kubernetes-version = "v1.36.2"
 cilium-version     = "1.20.0"

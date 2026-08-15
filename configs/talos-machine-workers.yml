@@ -6,12 +6,6 @@ machine:
     hostDNS:
       enabled: false
       forwardKubeDNSToHost: false
-  kernel:
-    modules: #longhorn v2 engine
-      - name: nvme_tcp
-      - name: vfio_pci
-      - name: uio_pci_generic
-      - name: ublk_drv
   kubelet:
     extraConfig:
       serverTLSBootstrap: true
@@ -22,9 +16,3 @@ machine:
     #disable wipe to keep longhorn v1 storage
     wipe: false
     disk: /dev/sda #root disk
-  nodeLabels:
-    node.longhorn.io/create-default-disk: "config"
-  nodeAnnotations:
-    node.longhorn.io/default-disks-config: '[{"name":"longhorn-v2","path":"/dev/disk/by-partlabel/r-longhorn","diskType":"block","allowScheduling":true}]'
-  sysctls: #longhorn v2 engine
-    vm.nr_hugepages: "1024"

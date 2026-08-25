@@ -97,4 +97,4 @@ talos-install-gpu  = "factory.talos.dev/nocloud-installer/58186f1f433747a083060f
 talos-version      = "v1.13.8"
 kubernetes-version = "v1.36.2"
 cilium-version     = "1.20.0"
-argocd-version     = "10.3.0"
+argocd-version     = "10.3.3"

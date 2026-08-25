@@ -11,6 +11,7 @@ data "helm_template" "cilium" {
   namespace    = "kube-system"
   repository   = "https://helm.cilium.io/"
   chart        = "cilium"
+  #replace      = true #re-use name if exist
   version      = var.cilium-version
   kube_version = var.kubernetes-version
   values       = ["${file("configs/cilium-values.yml")}"]

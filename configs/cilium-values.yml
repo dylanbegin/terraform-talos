@@ -1,5 +1,5 @@
 k8sClientRateLimit:
-  #adjusted for better vop perf
+  #adjusted for better vip perf
   qps: 50
   burst: 100
 cluster:
@@ -10,7 +10,7 @@ securityContext:
   capabilities:
     ciliumAgent: [CHOWN, KILL, NET_ADMIN, NET_RAW, IPC_LOCK, SYS_ADMIN, SYS_RESOURCE, DAC_OVERRIDE, FOWNER, SETGID, SETUID]
     cleanCiliumState: [NET_ADMIN, SYS_ADMIN, SYS_RESOURCE]
-autoDirectNodeRoutes: false
+autoDirectNodeRoutes: true #native routing req
 bgpControlPlane:
   enabled: false
 l2announcements:
@@ -43,13 +43,17 @@ hubble:
     enabled: true
     rollOutPods: true
     replicas: 1
+    frontend:
+      server:
+        ipv6:
+          enabled: false
 ingressController:
   enabled: false
   default: false
   loadbalancerMode: dedicated
 ipam:
   mode: "kubernetes"
-#ipv4NativeRoutingCIDR: "10.11.0.0/16" #do not masq/snat pods
+ipv4NativeRoutingCIDR: "10.244.0.0/16" #do not snat pod cidr
 ipv4:
   enabled: true
 ipv6:
@@ -61,16 +65,17 @@ kubeProxyReplacementHealthzBindAddr: 0.0.0.0:10256
 l7Proxy: false #enable if using Cilium ingress/gwapi
 loadBalancer:
   algorithm: maglev #improvement from random
-  mode: snat
+  mode: dsr
   acceleration: disabled #eBPF acceleration
+  dsrDispatch: geneve
 nodePort: #using ingress/gwapi
   enabled: false
 operator:
   replicas: 2
   rollOutPods: true
 rollOutCiliumPods: true
-tunnelProtocol: vxlan
-routingMode: tunnel #use native for eBPF node traffic
+tunnelProtocol: geneve
+routingMode: native #eBPF node traffic
 cgroup:
   autoMount:
     enabled: false

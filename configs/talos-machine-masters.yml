@@ -31,6 +31,8 @@ cluster:
   network:
     cni:
       name: none
+    #if you uncomment, also update cilium value line below!
+    #ipv4NativeRoutingCIDR: <- update this in cilium-values.yml
     #podSubnets:
     #  - ${talos-podcidr} #default 10.244.0.0/16
     #serviceSubnets:

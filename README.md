@@ -68,3 +68,10 @@ Several commands below are useful for ensuring the status of the install.
 - Cilium status commands:
   - General status: `cilium status`
   - Detailed status: `kubectl -n kube-system exec -it <cilium-pod> -- cilium-dbg status --verbose`
+
+# Changes To Manifest Without Upgrading K8s
+If you make changes to any inline manifest, Talos does not apply them to the cluster. Talos will only run `talosctl upgrade-k8s` when upgrading Kubernetes versions. To apply changes made on inline manifest (i.e. changing or upgrading Cilium) use the below steps:
+1. Make the changes to you manifest from the configs directory
+1. Re-apply the terraform plan to add the new/modified manifest to the Talos nodes.
+1. Run `talosctl upgrade-k8s -n <any-control-plane-node-ip>` to apply the new manifest.
+  1. You can also run `talosctl upgrade-k8s -n <any-control-plane-node-ip> --dry-run` to review the diff and check for any errors.

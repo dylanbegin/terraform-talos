@@ -32,6 +32,7 @@ cluster:
               - cidr: "10.10.10.101/32" #unifi-ap
               - cidr: "10.10.10.102/32" #portainer
               - cidr: "10.10.10.103/32" #teleport
+              - cidr: "10.10.10.104/32" #ldap-outpost
               - cidr: "10.10.10.111/32" #testing
               - cidr: "10.10.10.112/32" #testing
               - cidr: "10.10.10.113/32" #testing
